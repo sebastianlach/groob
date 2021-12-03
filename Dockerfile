@@ -5,6 +5,8 @@ LABEL maintainer="root@slach.eu"
 RUN apk add --no-cache mtools grub grub-efi breeze-grub parted
 
 WORKDIR /groob
+ADD grub.cfg .
+ADD custom.cfg .
 ADD entrypoint.sh .
 
 VOLUME /data

@@ -8,7 +8,7 @@ echo 'configfile ${cmdpath}/grub.cfg' > /tmp/grub.cfg
 grub-mkstandalone \
     --directory=/usr/lib/grub/x86_64-efi/ \
     --format=x86_64-efi \
-    --modules="part_gpt part_msdos" \
+    --modules="part_msdos part_gpt" \
     --locales="en@quot" \
     --themes="" \
     --output "grubx64.efi" \
@@ -24,6 +24,8 @@ mkfs.vfat -F 32 -n BOOT ${ESPIMAGE}
 mmd -i ${ESPIMAGE} ::EFI
 mmd -i ${ESPIMAGE} ::EFI/grub
 mcopy -i ${ESPIMAGE} grubx64.efi ::EFI/grub/
+mcopy -i ${ESPIMAGE} /groob/grub.cfg ::EFI/grub/
+mcopy -i ${ESPIMAGE} /groob/custom.cfg ::EFI/grub/
 
 # merge partitions
 dd if=${ESPIMAGE} of=${FILENAME} bs=1M oflag=append conv=notrunc
