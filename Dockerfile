@@ -2,13 +2,11 @@ FROM alpine
 LABEL maintainer="root@slach.eu"
 
 # install required packages
-RUN apk add --no-cache mtools grub grub-efi parted
+RUN apk add --no-cache mtools grub grub-efi breeze-grub parted
 
-ADD grub /etc/default/grub
-
-WORKDIR /gboot
+WORKDIR /groob
 ADD entrypoint.sh .
 
 VOLUME /data
 WORKDIR /data
-CMD ["/gboot/entrypoint.sh"]
+CMD ["/groob/entrypoint.sh"]
