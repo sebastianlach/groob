@@ -1,23 +1,24 @@
 #!/bin/sh -e
 
+touch /overlay
+
 # generate first part
 rm -f gboot.img
 fallocate -l 1M gboot.img
 
 # generate main part
-fallocate -l 2047M boot.img
-mkfs.vfat -F 32 -n BOOT boot.img
-mmd -i boot.img ::EFI
+fallocate -l 127M esp.img
+mkfs.vfat -F 32 -n BOOT esp.img
+mmd -i esp.img ::EFI
 mkdir /boot
-mount boot.img /boot
-grub-install --target=x86_64-efi --efi-directory=/boot --removable --bootloader-id gboot
-touch /overlay
+mount esp.img /boot
+grub-install --target=x86_64-efi --efi-directory=/boot --removable
 grub-mkconfig -o /boot/grub/grub.cfg
 umount /boot
 
 # merge parts
-dd if=boot.img of=gboot.img bs=1M oflag=append conv=notrunc
-rm -f boot.img
+dd if=esp.img of=gboot.img bs=1M oflag=append conv=notrunc
+rm -f esp.img
 
 # add partition table
 parted gboot.img mklabel msdos
