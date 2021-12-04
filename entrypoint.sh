@@ -19,7 +19,7 @@ rm -f ${FILENAME}
 fallocate -l 1M ${FILENAME}
 
 # generate ESP partition
-fallocate -l 1023M ${ESPIMAGE}
+fallocate -l 1024M ${ESPIMAGE}
 mkfs.vfat -F 32 -n BOOT ${ESPIMAGE}
 mmd -i ${ESPIMAGE} ::EFI
 mmd -i ${ESPIMAGE} ::EFI/grub
