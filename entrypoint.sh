@@ -14,8 +14,6 @@ grub-mkstandalone \
     --output="grubx64.efi" \
     "boot/grub/grub.cfg=/tmp/grub.cfg"
 
-# copy themes
-
 # generate first part
 rm -f ${FILENAME}
 fallocate -l 1M ${FILENAME}
@@ -28,9 +26,8 @@ mmd -i ${ESPIMAGE} ::EFI/grub
 mcopy -i ${ESPIMAGE} grubx64.efi ::EFI/grub/
 mcopy -i ${ESPIMAGE} /groob/grub.cfg ::EFI/grub/
 mcopy -i ${ESPIMAGE} /groob/custom.cfg ::EFI/grub/
-mcopy -i ${ESPIMAGE} -s /groob/script ::EFI/grub/script
 mcopy -i ${ESPIMAGE} -s /groob/themes ::EFI/grub/themes
-mmd -i ${ESPIMAGE} ::iso
+mmd -i ${ESPIMAGE} ::ISO
 
 # merge partitions
 dd if=${ESPIMAGE} of=${FILENAME} bs=1M oflag=append conv=notrunc
