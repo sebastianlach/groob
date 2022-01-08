@@ -2,7 +2,7 @@ FROM alpine
 LABEL maintainer="root@slach.eu"
 
 # install required packages
-RUN apk add --no-cache mtools grub grub-efi parted
+RUN apk add --no-cache mtools grub grub-efi parted dosfstools
 
 WORKDIR /groob
 ADD grub.cfg .

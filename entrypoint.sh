@@ -20,7 +20,8 @@ fallocate -l 1M ${FILENAME}
 
 # generate ESP partition
 fallocate -l 1024M ${ESPIMAGE}
-mkfs.vfat -F 32 -n BOOT ${ESPIMAGE}
+mkfs.vfat -F 32 ${ESPIMAGE}
+dosfslabel ${ESPIMAGE} BOOT
 mmd -i ${ESPIMAGE} ::EFI
 mmd -i ${ESPIMAGE} ::EFI/grub
 mcopy -i ${ESPIMAGE} grubx64.efi ::EFI/grub/
