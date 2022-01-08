@@ -19,7 +19,7 @@ jobs:
       - run:
           name: "Push docker image"
           command: |
-            docker login -u slach -p $DOCKERHUB_PASSWORD
+            docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
             docker tag slach/groob:$CIRCLE_SHA1 slach/groob:latest
             docker push slach/groob:$CIRCLE_SHA1
             docker push slach/groob:latest
