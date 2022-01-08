@@ -28,6 +28,8 @@ mcopy -i ${ESPIMAGE} /groob/grub.cfg ::EFI/grub/
 mcopy -i ${ESPIMAGE} /groob/custom.cfg ::EFI/grub/
 mcopy -i ${ESPIMAGE} -s /groob/themes ::EFI/grub/themes
 mmd -i ${ESPIMAGE} ::ISO
+mcopy -i ${ESPIMAGE} /boot/vmlinuz-* ::
+mcopy -i ${ESPIMAGE} /boot/initramfs-* ::
 
 # merge partitions
 dd if=${ESPIMAGE} of=${FILENAME} bs=1M oflag=append conv=notrunc

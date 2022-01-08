@@ -12,4 +12,7 @@ ADD entrypoint.sh .
 
 VOLUME /data
 WORKDIR /data
+
+VOLUME /boot
+
 CMD ["/groob/entrypoint.sh"]
